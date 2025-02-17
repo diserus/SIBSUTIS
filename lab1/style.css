@@ -14,10 +14,10 @@ header {
     padding-top: 32px;
     color: white;
     text-align: center;
+    height: 861px; 
 }
 
 .logo {
-
     height: 55.44px;
     width: 100px;
     font-family: Impact;
@@ -25,12 +25,10 @@ header {
     font-style: normal;
     font-weight: 900;
     line-height: 27.63px;
-
 }
 
 .header-h1 {
     width: 480px;
-    height: 88px;
     font-family: "Inter";
     font-size: 36px;
     font-style: normal;
@@ -47,7 +45,6 @@ header {
 
 .header-h2 {
     width: 480px;
-    height: 87px;
     font-family: "Inter";
     font-size: 24px;
     font-style: normal;
@@ -57,7 +54,6 @@ header {
 
 .header-subtext {
     width: 480px;
-    height: 85px;
     font-family: "Inter";
     font-size: 14px;
     font-style: normal;
@@ -91,6 +87,7 @@ header {
 main {
     display: grid;
     place-items: center;
+    min-height: calc(100vh - 861px - 181px); 
 }
 
 .item {
@@ -130,38 +127,27 @@ main {
     flex: none;
     order: 1;
     flex-grow: 0;
-    /* margin: 0px 32px; */
     color: rgb(38, 38, 38);
-
     font-family: Inter;
-
-
     letter-spacing: 0px;
-
     text-align: left;
 }
 
 .item-descripstion h2 {
     font-size: 24px;
-
     font-weight: 700;
-
     line-height: 29px;
 }
 
 .item-descripstion span {
     font-size: 14px;
-
     font-weight: 400;
-
     line-height: 17px;
 }
 
 .item-descripstion a {
     font-size: 14px;
-
     font-weight: 600;
-
     line-height: 17px;
     color: rgb(27, 84, 221);
     margin: 16px 0px;
@@ -185,41 +171,26 @@ footer {
     display: grid;
     place-items: center;
     text-align: center;
+    height: 181px; 
 }
 
 .social-icons {
-    /* Social Icons (Footer)  */
-
     position: static;
-
     width: 118px;
-
     height: 18px;
-
-    /* Автолейаут */
-
     display: flex;
-
     flex-direction: row;
-
     justify-content: space-between;
-
     padding: 0px;
-
-
-
     margin: 26px 0px 0px 0px;
 }
 
 .footer-information h2 {
     color: rgb(38, 38, 38);
-
     font-family: Inter;
     font-size: 14pt;
     font-weight: 400;
-
     letter-spacing: 0px;
-
     text-align: center;
 }
 
@@ -233,8 +204,61 @@ footer {
     line-height: 16px;
     letter-spacing: 0px;
 }
-.dma-logo{
+
+.dma-logo {
     width: 40px;
     height: 22px;
     margin: 16px 0px 26px 0px;
+}
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 16px;
+    }
+
+    .header-img {
+        width: 100%;
+        max-width: 480px;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .header-h1,
+    .header-h2,
+    .header-subtext {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    .item {
+        width: 100%;
+        max-width: 480px;
+        height: auto;
+        flex-direction: column;
+        margin: 24px 16px;
+    }
+
+    .item.main-button {
+        width: 110px;
+        height: 41px;
+        margin: 24px auto;
+        flex-direction: row;
+    }
+
+    .item img {
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        margin: 0 0 16px 0;
+    }
+
+    .item-descripstion {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    main {
+        padding: 16px;
+    }
 }
