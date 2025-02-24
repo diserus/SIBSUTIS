@@ -1,43 +1,42 @@
-import orderBy from './orderBy.js';
+const orderBy = require('./orderBy');
 
-test('Сортировка массива объектов по свойствам "name" и "age"', () => {
-    const users = [
-        { name: 'Alice', age: 25 },
-        { name: 'Bob', age: 30 },
-        { name: 'Alice', age: 20 },
-        { name: 'Charlie', age: 35 }
+test('Сортировка по одному свойству', () => {
+    const input = [
+        { name: 'Вася', age: 25 },
+        { name: 'Петя', age: 22 },
+        { name: 'Артем', age: 30 }
     ];
-
-    const sortedUsers = orderBy(users, ['name', 'age']);
-
-    expect(sortedUsers).toEqual([
-        { name: 'Alice', age: 20 },
-        { name: 'Alice', age: 25 },
-        { name: 'Bob', age: 30 },
-        { name: 'Charlie', age: 35 }
-    ]);
+    const expected = [
+        { name: 'Артем', age: 30 },
+        { name: 'Вася', age: 25 },
+        { name: 'Петя', age: 22 }
+    ];
+    expect(orderBy(input, ['name'])).toEqual(expected);
 });
 
-test('Выброс исключения, если массив содержит не объекты', () => {
-    const invalidArray = [
-        { name: 'Alice', age: 25 },
-        'Not an object',
-        { name: 'Bob', age: 30 }
+test('Сортировка по нескольким свойствам', () => {
+    const input = [
+        { name: 'Вася', age: 25 },
+        { name: 'Петя', age: 22 },
+        { name: 'Вася', age: 20 }
     ];
-
-    expect(() => orderBy(invalidArray, ['name', 'age'])).toThrow(
-        'Все элементы массива должны быть объектами'
-    );
+    const expected = [
+        { name: 'Вася', age: 20 },
+        { name: 'Вася', age: 25 },
+        { name: 'Петя', age: 22 }
+    ];
+    expect(orderBy(input, ['name', 'age'])).toEqual(expected);
 });
 
-test('Выброс исключения, если у объекта отсутствует свойство', () => {
-    const usersWithMissingProperty = [
-        { name: 'Alice', age: 25 },
-        { name: 'Bob' },
-        { name: 'Charlie', age: 35 }
-    ];
+test('Исключение при передаче не массива объектов', () => {
+    const input = [1, 2, 3,{ name: 'Вася', age: 25 }];
+    expect(() => orderBy(input, ['name'])).toThrow('Первый аргумент должен быть массивом объектов');
+});
 
-    expect(() => orderBy(usersWithMissingProperty, ['name', 'age'])).toThrow(
-        'Свойство "age" отсутствует в одном из объектов'
-    );
+test('Исключение при отсутствии свойства в объекте', () => {
+    const input = [
+        { name: 'Вася', age: 25 },
+        { name: 'Петя' }
+    ];
+    expect(() => orderBy(input, ['name', 'age'])).toThrow('Объект не содержит свойства "age"');
 });

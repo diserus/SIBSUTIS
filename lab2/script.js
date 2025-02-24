@@ -1,10 +1,10 @@
 import orderBy from './orderBy.js';
 
 const users = [
-    { name: 'Alice', age: 25 },
-    { name: 'Bob', age: 30 },
-    { name: 'Alice', age: 20 },
-    { name: 'Charlie', age: 35 }
+    { name: 'Артем', age: 25 },
+    { name: 'Петя', age: 30 },
+    { name: 'Артем', age: 20 },
+    { name: 'Вася', age: 35 }
 ];
 
 try {
