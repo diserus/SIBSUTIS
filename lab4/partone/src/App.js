@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import BookCard from './BookCard';
+import SearchAndSortControls from './SearchAndSortControls';
 
 const App = () => {
   const [books, setBooks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortField, setSortField] = useState('title');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
-    // Загрузка данных о книгах
     fetch('https://fakeapi.extendsclass.com/books')
       .then(response => response.json())
       .then(data => {
         const booksWithCovers = data.map(book => ({
           ...book,
-          coverImage: null, // Пока что изображение отсутствует
+          coverImage: null,
         }));
         setBooks(booksWithCovers);
 
-        // Загрузка обложек для каждой книги
         booksWithCovers.forEach((book, index) => {
           fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${book.isbn}`)
             .then(response => response.json())
             .then(googleData => {
-              if (googleData.items && googleData.items[0].volumeInfo.imageLinks) {
+              if (googleData.items?.[0]?.volumeInfo?.imageLinks?.thumbnail) {
                 const coverImage = googleData.items[0].volumeInfo.imageLinks.thumbnail;
                 setBooks(prevBooks => {
                   const newBooks = [...prevBooks];
@@ -33,16 +35,48 @@ const App = () => {
       });
   }, []);
 
+  // Фильтрация книг
+  const filteredBooks = books.filter(book => {
+    const query = searchQuery.toLowerCase();
+    const titleMatch = book.title.toLowerCase().includes(query);
+    const authorsMatch = book.authors.join(', ').toLowerCase().includes(query);
+    return titleMatch || authorsMatch;
+  });
+
+  // Сортировка книг
+  const sortedBooks = [...filteredBooks].sort((a, b) => {
+    let valueA, valueB;
+    if (sortField === 'title') {
+      valueA = a.title;
+      valueB = b.title;
+    } else {
+      valueA = a.authors.join(', ');
+      valueB = b.authors.join(', ');
+    }
+    const compareResult = valueA.localeCompare(valueB);
+    return sortOrder === 'asc' ? compareResult : -compareResult;
+  });
+
   return (
-    <div style={styles.container}>
-      {books.map(book => (
-        <BookCard
-          key={book.id}
-          title={book.title}
-          authors={book.authors}
-          coverImage={book.coverImage}
-        />
-      ))}
+    <div>
+      <SearchAndSortControls
+        searchQuery={searchQuery}
+        onSearchChange={(e) => setSearchQuery(e.target.value)}
+        sortField={sortField}
+        onSortFieldChange={(e) => setSortField(e.target.value)}
+        sortOrder={sortOrder}
+        onSortOrderChange={(e) => setSortOrder(e.target.value)}
+      />
+      <div style={styles.container}>
+        {sortedBooks.map(book => (
+          <BookCard
+            key={book.id}
+            title={book.title}
+            authors={book.authors}
+            coverImage={book.coverImage}
+          />
+        ))}
+      </div>
     </div>
   );
 };
