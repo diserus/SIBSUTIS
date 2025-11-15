@@ -8,7 +8,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
-# ---------------- Константы ----------------
 ADMIN_LOGIN = "root"
 ADMIN_PASS = "0penBmc"
 BLOCKED_LOGIN = "testuser"
@@ -16,7 +15,6 @@ BLOCKED_PASS = "test23pwd"
 BASE_URL = "https://127.0.0.1:2443"
 
 
-# ---------------- Инициализация драйвера ----------------
 def setup_driver():
     options = Options()
     options.add_argument("--no-sandbox")
