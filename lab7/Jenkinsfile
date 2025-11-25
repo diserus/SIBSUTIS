@@ -32,9 +32,9 @@ pipeline {
             steps {
                 echo 'Запуск автотестов'
                 sh '''
-                  apt-get install -y python3 python3-pip
-                  pip3 install --upgrade pip
-                  pip3 install pytest requests
+                  apt-get install -y python3
+                  apt install -y python3-pytest
+                  apt install -y python3-requests
                   cd lab4
                   pytest -v tests.py | tee ../lab4_results.txt
                   cd ..
@@ -46,8 +46,10 @@ pipeline {
             steps {
                 echo 'Запуск WebUI тестов'
                 sh '''
-                  apt-get install -y python3-pip firefox
-                  pip3 install selenium pytest requests
+                  apt-get install -y firefox
+                  apt install -y python3-pytest
+                  apt install -y python3-selenium
+                  apt install -y python3-requests
                   wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
                   tar -xzf geckodriver-linux64.tar.gz
                   chmod +x geckodriver
@@ -63,7 +65,8 @@ pipeline {
             steps {
                 echo 'Запуск нагрузочных тестов Locust'
                 sh '''
-                  pip3 install locust requests
+                  apt install -y python3-locust
+                  apt install -y python3-requests
                   cd lab6
                   timeout 180 locust --headless --users 50 --spawn-rate 5 --run-time 2m --host=https://127.0.0.1:2443 | tee ../lab6_results.txt
                   cd ..
