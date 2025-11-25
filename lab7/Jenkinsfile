@@ -1,5 +1,6 @@
 pipeline {
-    agent any 
+    agent any
+     
     stages{
         stage('Qemu') {
             steps{
@@ -8,7 +9,8 @@ pipeline {
                 apt-get update
                 apt-get install -y qemu-system-arm wget unzip expect
                 rm -rf romulus romulus.zip || true
-                wget "$ROMULUS_ZIP_URL" -O romulus.zip
+                wget "https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip" -O romulus.zip
+
                 unzip -o romulus.zip
                 LATEST_MTD=$(ls romulus/obmc-phosphor-image-romulus-*.static.mtd | sort -V | tail -1)
                 nohup qemu-system-arm -m 256 -M romulus-bmc -nographic \
