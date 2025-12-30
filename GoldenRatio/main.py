@@ -1,6 +1,6 @@
 def f(x):
     return x**2-6*x
-def golden(a,b,steps):
+def golden(a,b,eps):
     it = 0
     k1 = 0.382 
     k2 = 1-k1
@@ -8,7 +8,7 @@ def golden(a,b,steps):
     lambda2 = a + k2 * (b - a)
     f1 = f(lambda1)
     f2 = f(lambda2)
-    while it<steps:
+    while abs(b-a)>eps:
         it+=1
         print(f"Текущая итерация: {it}")
         if f1 > f2:
@@ -29,11 +29,12 @@ def golden(a,b,steps):
     print(f"\n\nМинимум функции находится в интервале [ {a} ; {b}]")
     print(f"\nПриблизительное значение минимума: x = {x}")
     print(f"\nЗначение функции f({x}) = {f(x)}")
+    print(f"Количество итераций: {it}")
+
 if __name__=="__main__":
     a=0
     b=5
-    steps = 4
+    eps = 10**(-5)
     print(f"Исследуемый интервал: [{a} ; {b}]")
-    print(f"\nКоличество итераций: {steps}\n")
     print("Функция: f(x) = x^2 - 6x\n")
-    golden(a,b,steps)
+    golden(a,b,eps)
