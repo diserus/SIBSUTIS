@@ -1,0 +1,66 @@
+.app {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 500px;
+  }
+  
+  .comment-form input,
+  .comment-form textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .comment-form textarea {
+    min-height: 100px;
+  }
+  
+  .comment-form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .comment-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .actions {
+    margin-bottom: 20px;
+  }
+  
+  .actions button {
+    padding: 8px 16px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .actions button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .actions button:hover:not(:disabled) {
+    background-color: #d32f2f;
+  }
+  
+  .comment-body {
+    white-space: pre-wrap;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
