@@ -1,0 +1,16 @@
+{
+  "currencies": [
+    {
+      "name": "RUB",
+      "rate": 1,
+      "date": "2024-12-15"
+    },
+    {
+      "name": "RUB",
+      "rate": 1,
+      "date": "2024-12-15"
+    }
+  ],
+  "expenses": [],
+  "incomes": []
+}
