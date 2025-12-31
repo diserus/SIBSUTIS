@@ -1,0 +1,52 @@
+stages:
+  - build
+  - diff
+  - deploy
+
+build_and_push_image:
+  stage: build
+  image: docker:24
+  services:
+    - docker:24-dind
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+    - echo "$HAWK_REGISTRY_PASSWORD" | docker login -u "$HAWK_REGISTRY_USER" "$HAWK_REGISTRY" --password-stdin
+    
+    - TAG=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
+    - docker context create ci
+    - docker buildx create --name multiarch-builder --driver docker-container --use ci
+    
+    - docker buildx build --provenance=false --push --platform linux/arm64,linux/amd64 -t "$CI_REGISTRY_IMAGE:$TAG" -t "$HAWK_REGISTRY_IMAGE:$TAG" .
+  rules:
+    - if: '$CI_COMMIT_BRANCH'
+      when: manual
+    - if: '$CI_COMMIT_TAG'
+      when: always
+.helm_common:
+  image:
+    name: alpine/helm:3.18.0
+    entrypoint: [""]
+  before_script:
+    - mkdir -p ~/.kube
+    - cp "$KUBE_CONFIG" ~/.kube/config
+    - chmod 600 ~/.kube/config
+    - helm version
+    - kubectl version --client || true
+diff_hawk:
+  stage: diff
+  extends: .helm_common
+  script:
+    - TAG=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
+    - helm plugin install https://github.com/databus23/helm-diff || true  
+    - helm diff upgrade --install "nodejs-app-helm" ./helm/nodejs-app --namespace ip314 --set image.repository="$HAWK_REGISTRY_IMAGE" --set image.tag="$TAG"
+  rules:
+    - when: manual
+
+deploy_to_hawk:
+  stage: deploy
+  extends: .helm_common
+  script:
+    - TAG=${CI_COMMIT_TAG:-$CI_COMMIT_SHORT_SHA}
+    - helm upgrade --install "nodejs-app-helm" ./helm/nodejs-app --namespace ip314 --set image.repository="$HAWK_REGISTRY_IMAGE" --set image.tag="$TAG" --wait
+  rules:
+    - when: manual
