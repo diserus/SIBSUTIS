@@ -1,0 +1,16 @@
+debug/attemptstore.o
+debug/authservice.o
+debug/logindialog.o
+debug/main.o
+debug/mainwindow.o
+debug/qquestionwidget.o
+debug/registerdialog.o
+debug/testeditor.o
+debug/testrundialog.o
+debug/userrepository.o
+debug/moc_logindialog.o
+debug/moc_mainwindow.o
+debug/moc_qquestionwidget.o
+debug/moc_registerdialog.o
+debug/moc_testeditor.o
+debug/moc_testrundialog.o

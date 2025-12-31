@@ -1,0 +1,16 @@
+release/attemptstore.o
+release/authservice.o
+release/logindialog.o
+release/main.o
+release/mainwindow.o
+release/qquestionwidget.o
+release/registerdialog.o
+release/testeditor.o
+release/testrundialog.o
+release/userrepository.o
+release/moc_logindialog.o
+release/moc_mainwindow.o
+release/moc_qquestionwidget.o
+release/moc_registerdialog.o
+release/moc_testeditor.o
+release/moc_testrundialog.o

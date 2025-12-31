@@ -1,0 +1,14 @@
+[
+    {
+        "hash": "388b3f2c2c79ad4d9e5f1313c70c58b08b1b94f976239f4aac93afd3357a1ae3",
+        "login": "aboba",
+        "role": "teacher",
+        "salt": "a4bc66e2e1e81193114278962b8e936c"
+    },
+    {
+        "hash": "dc3efdda8a23e2cde8952b6b7bf7ed68e6e127742044184eb09d899125a11aba",
+        "login": "фффффф",
+        "role": "student",
+        "salt": "35333d258e735c4e5643bdda169fbc10"
+    }
+]

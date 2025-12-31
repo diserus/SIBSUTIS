@@ -1,0 +1,19 @@
+{
+    "attempts": [
+        {
+            "author": "aboba",
+            "difficulty": "Easy",
+            "finishedAtIso": "2025-12-25T17:35:32Z",
+            "maxScore": 1,
+            "score": 0,
+            "subject": "ООП",
+            "testId": "t_ооп_1766676999",
+            "timeLimitSec": 600,
+            "timeSpentSec": 159,
+            "timeout": false,
+            "title": "ФФФФ",
+            "user": "фффффф"
+        }
+    ],
+    "version": 1
+}

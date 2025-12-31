@@ -1,0 +1,46 @@
+{
+    "tests": [
+        {
+            "anyFree": 0,
+            "anyMulti": 0,
+            "anySingle": 1,
+            "author": "aboba",
+            "difficulty": "Easy",
+            "id": "t_ооп_1766676999",
+            "questions": [
+                {
+                    "answer": [
+                        "a"
+                    ],
+                    "id": "q1",
+                    "options": [
+                        {
+                            "id": "a",
+                            "text": "fsdfsdfds"
+                        },
+                        {
+                            "id": "b",
+                            "text": "fsdfdsfdsf"
+                        },
+                        {
+                            "id": "c",
+                            "text": "fdsfds"
+                        },
+                        {
+                            "id": "d",
+                            "text": "fdsfsdfs"
+                        }
+                    ],
+                    "points": 1,
+                    "text": "fdsfdsfds",
+                    "type": "single"
+                }
+            ],
+            "subject": "ООП",
+            "timeLimitSec": 600,
+            "title": "ФФФФ",
+            "topic": "Наследование"
+        }
+    ],
+    "version": 1
+}

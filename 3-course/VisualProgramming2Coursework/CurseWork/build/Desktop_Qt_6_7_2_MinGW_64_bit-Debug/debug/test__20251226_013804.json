@@ -1,0 +1,19 @@
+{
+    "tests": [
+        {
+            "anyFree": 0,
+            "anyMulti": 0,
+            "anySingle": 0,
+            "author": "aboba",
+            "difficulty": "Easy",
+            "id": "t__1766687884",
+            "questions": [
+            ],
+            "subject": "",
+            "timeLimitSec": 600,
+            "title": "",
+            "topic": ""
+        }
+    ],
+    "version": 1
+}
